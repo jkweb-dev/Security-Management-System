@@ -1,4 +1,54 @@
+import { useState } from "react";
+import { useEffect } from "react";
+import Loader from "../Components/Loader";
+import ErrorScreen from "../Components/Error";
+import axios from "axios"
+import { useNavigate } from "react-router-dom";
+
 export const Dashboard = () => {
+const navigate = useNavigate()
+
+  const [loading , setLoading] = useState(true)
+  const [error , setError] = useState(null)
+  
+   useEffect(() => {
+        
+        const verifyToken = async () => {
+            try {
+                const token = localStorage.getItem("token")
+
+                const res = await axios.get("http://localhost:5000/dashboard" ,{
+                    headers : {
+                        Authorization : `Bearer ${token}`
+                    }
+                })
+               
+               
+            } catch (error) {
+                console.log(error.response?.status)
+                if (error.response && error.response.status === 401) {
+                    localStorage.removeItem("token")
+                    navigate("/login")
+                }else if (error.response.status === 500){
+                   setError("Something went wrong in Server , Please try again later")
+                }
+            }finally{
+              setLoading(false)
+            }
+        }
+        verifyToken()
+    }, [])
+
+
+    if (loading) {
+      return <Loader/>
+    }
+
+    if (error) {
+      return <ErrorScreen error={error}/>;
+      
+    }
+    
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-purple-900 to-indigo-900 text-white p-4 sm:p-6 md:p-10 flex flex-col justify-center items-center">
 

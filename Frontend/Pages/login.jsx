@@ -1,8 +1,18 @@
 import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios"
 import validate from "../Components/LoginFormValidation";
 
+
 export const LoginPage = () => {
+  const navigate = useNavigate()
+  const token = localStorage.getItem("token");
+
+ 
+     if (token) {
+   <Navigate to="/dashboard" replace />
+  }
+  
   const [loginForm , setLoginForm] = useState({
   email : "",
     password : ""
@@ -32,9 +42,12 @@ export const LoginPage = () => {
 
 
   try {
+    
+
     const res = await axios.post("http://localhost:5000/login" , loginForm)
 
     localStorage.setItem("token" , res.data.token)
+     navigate("/dashboard")
 
 
   } catch (error) {
@@ -54,6 +67,8 @@ export const LoginPage = () => {
 
   }
  
+ 
+  
   setLoginForm({
     email : "",
     password : ""

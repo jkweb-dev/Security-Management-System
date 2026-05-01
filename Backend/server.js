@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import cors from "cors"
 import connectDB from "./Configurations/dB.js";
 import loginRoute from "./Routes/loginRoute.js";
+import dashboardRoute from "./Routes/DahboardRoute.js";
 
 dotenv.config()
 
@@ -13,6 +14,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use("/login" ,loginRoute)
+app.use("/dashboard" ,dashboardRoute)
 
 const PORT = process.env.PORT
 

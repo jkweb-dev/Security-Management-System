@@ -3,6 +3,20 @@ import { useNavigate } from "react-router-dom";
 export const Landing = () => {
   const navigate = useNavigate();
 
+  const handleGetStarted = () => {
+    
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate("/dashboard")
+    } else {
+      navigate("/login")
+    }
+
+
+  }
+
+
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-purple-900 to-indigo-900 text-white">
 
@@ -107,7 +121,7 @@ export const Landing = () => {
         {/* Button */}
         <div className="mt-12">
           <button
-            onClick={() => navigate("/login")}
+            onClick={handleGetStarted}
             className="
               relative 
               px-8 py-4 
