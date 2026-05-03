@@ -3,6 +3,7 @@ import { Landing } from "../Pages/landingPage"
 import { LoginPage } from "../Pages/login"
 import { Dashboard } from "../Pages/dashboard"
 import ProtectedRoute from "../Components/ProtectedRoute"
+import { AddGuard } from "../Pages/AddGuard"
 
 const router = createBrowserRouter([
    {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     path : "/dashboard",
     element : <Dashboard/>
 },
+ {
+    path : "/guards",
+    element : <AddGuard/>
+   },
         ]
     },
 
