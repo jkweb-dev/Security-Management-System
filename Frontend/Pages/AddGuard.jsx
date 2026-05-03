@@ -76,7 +76,7 @@ const [resetKey , setResetKey] = useState(0)
 
                try {
                 const token = localStorage.getItem("token")
-                const res = await axios.post("http://localhost:5000/guards" , data ,
+                const res = await axios.post("http://localhost:5000/Addguard" , data ,
                   {
                     headers :{
                        Authorization : `Bearer ${token}`

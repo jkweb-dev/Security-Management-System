@@ -1,7 +1,7 @@
 import express from "express"
 import { verifyToken } from "../Middlewares/VerifyToken.js";
 import { uploadGuardFiles } from "../Middlewares/guardFilesUpload.js";
-import { createGuard } from "../Controllers/GuardLogic.js";
+import { createGuard } from "../Controllers/AddGuardLogic.js";
 
 
 const router = express.Router();

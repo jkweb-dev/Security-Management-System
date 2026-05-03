@@ -4,6 +4,7 @@ import { LoginPage } from "../Pages/login"
 import { Dashboard } from "../Pages/dashboard"
 import ProtectedRoute from "../Components/ProtectedRoute"
 import { AddGuard } from "../Pages/AddGuard"
+import { Guards } from "../Pages/Guards"
 
 const router = createBrowserRouter([
    {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     element : <LoginPage/>
    },
 
+    
   
 
    {
@@ -25,10 +27,17 @@ const router = createBrowserRouter([
     path : "/dashboard",
     element : <Dashboard/>
 },
+
  {
-    path : "/guards",
+    path : "/Addguard",
     element : <AddGuard/>
    },
+   
+    {
+    path : "/guards",
+    element : <Guards/>
+   },
+
         ]
     },
 
