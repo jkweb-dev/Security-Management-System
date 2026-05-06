@@ -50,6 +50,45 @@ const navigate = useNavigate()
     )
   })
 
+  const handleView = (id) => {
+    navigate(`/profile/${id}`)
+  }
+
+  const handleEdit = (id) => {
+    navigate(`/profile/edit/${id}`)
+  }
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this Guard Profile")
+
+    if (!confirmDelete) return ;
+
+    try {
+      const token = localStorage.getItem("token")
+
+      await axios.delete(`http://localhost:5000/profile/${id}` , {
+        headers : {
+          Authorization : `Bearer ${token}`
+        }
+      })
+
+      alert("Guard Deleted Successfully")
+
+      setGuards(p => p.filter(g => g._id !== id))
+
+    } catch (error) {
+      console.log(error)
+      if (error.response?.status === 401) {
+         localStorage.removeItem("token")
+         navigate("/login")
+       }else if (error.response?.status === 404) {
+        alert("Guard Not Found")
+       } else if (error.response?.status === 500) {
+         alert("Internal Server Error")
+       }
+    }
+  }
+
   // 3️⃣ LOADING STATE
   if (loading) {
      return <Loader/>
@@ -78,7 +117,7 @@ const navigate = useNavigate()
             All Guards
           </h1>
 
-          <button className="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-500">
+          <button onClick={() => navigate("/Addguard")} className="px-5 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-500">
             + Add Guard
           </button>
         </div>
@@ -139,15 +178,15 @@ const navigate = useNavigate()
                     <td className="p-3 text-center">
                       <div className="flex justify-center gap-2 flex-wrap">
 
-                        <button className="px-3 py-1 text-sm bg-green-100 text-green-700 rounded-md">
+                        <button onClick={() => handleView(guard._id)} className="px-3 py-1 text-sm bg-green-100 text-green-700 rounded-md">
                           View
                         </button>
 
-                        <button className="px-3 py-1 text-sm bg-yellow-100 text-yellow-700 rounded-md">
+                        <button onClick={() => handleEdit(guard._id)} className="px-3 py-1 text-sm bg-yellow-100 text-yellow-700 rounded-md">
                           Edit
                         </button>
 
-                        <button className="px-3 py-1 text-sm bg-red-100 text-red-600 rounded-md">
+                        <button onClick={() => handleDelete(guard._id)} className="px-3 py-1 text-sm bg-red-100 text-red-600 rounded-md">
                           Delete
                         </button>
 

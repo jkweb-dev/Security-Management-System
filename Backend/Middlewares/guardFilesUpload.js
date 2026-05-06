@@ -1,6 +1,6 @@
 import { upload } from "./multer.js";
 
-// reusable upload middleware
+
 export const uploadGuardFiles = (req, res, next) => {
   upload.fields([
     { name: "profilePic", maxCount: 1 },
@@ -15,6 +15,6 @@ export const uploadGuardFiles = (req, res, next) => {
       });
     }
 
-    next(); // continue to controller
+    next(); 
   });
 };

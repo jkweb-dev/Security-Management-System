@@ -5,6 +5,8 @@ import { Dashboard } from "../Pages/dashboard"
 import ProtectedRoute from "../Components/ProtectedRoute"
 import { AddGuard } from "../Pages/AddGuard"
 import { Guards } from "../Pages/Guards"
+import { Profile } from "../Pages/Profile"
+import { ProfileEdit } from "../Pages/profileEdit"
 
 const router = createBrowserRouter([
    {
@@ -36,6 +38,16 @@ const router = createBrowserRouter([
     {
     path : "/guards",
     element : <Guards/>
+   },
+
+     {
+    path : "/profile/:id",
+    element : <Profile/>
+   },
+
+    {
+    path : "/profile/edit/:id",
+    element : <ProfileEdit/>
    },
 
         ]
