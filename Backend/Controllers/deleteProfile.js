@@ -11,15 +11,15 @@ export const deleteGuard = async (req , res) => {
             })
         }
 
-        console.log("PROFILE :", JSON.stringify(deleted.profilePic))
+     
         if(deleted.profilePic)
             fs.unlinkSync(deleted.profilePic)
 
-        console.log("Front:", JSON.stringify(deleted.cnicFront))
+
           if(deleted.cnicFront)
             fs.unlinkSync(deleted.cnicFront)
 
-        console.log("Back :", JSON.stringify(deleted.cnicBack))
+      
             if(deleted.cnicBack)
             fs.unlinkSync(deleted.cnicBack)
 

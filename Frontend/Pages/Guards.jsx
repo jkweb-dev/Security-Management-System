@@ -11,7 +11,11 @@ const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  const [showModal , setShowModal] = useState(false)
+  const [selectedId , setSelectedId] = useState(null)
+
   // 1️⃣ Fetch Guards
+  console.log(showModal)
   useEffect(() => {
     const fetchGuards = async () => {
       try {
@@ -58,36 +62,39 @@ const navigate = useNavigate()
     navigate(`/profile/edit/${id}`)
   }
 
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this Guard Profile")
+  
+  const openDeleteModal = (id) => {
+    setSelectedId(id)
+    setShowModal(true)
+    
+  }
 
-    if (!confirmDelete) return ;
+  const confirmDelete = async () => {
+  try {
+    const token = localStorage.getItem("token")
 
-    try {
-      const token = localStorage.getItem("token")
+    await axios.delete(`http://localhost:5000/profile/${selectedId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
 
-      await axios.delete(`http://localhost:5000/profile/${id}` , {
-        headers : {
-          Authorization : `Bearer ${token}`
-        }
-      })
+    // remove from UI
+    setGuards(prev => prev.filter(g => g._id !== selectedId))
 
-      alert("Guard Deleted Successfully")
+    setShowModal(false)
 
-      setGuards(p => p.filter(g => g._id !== id))
-
-    } catch (error) {
-      console.log(error)
-      if (error.response?.status === 401) {
-         localStorage.removeItem("token")
-         navigate("/login")
-       }else if (error.response?.status === 404) {
-        alert("Guard Not Found")
-       } else if (error.response?.status === 500) {
-         alert("Internal Server Error")
-       }
+  } catch (error) {
+    if (error.response.status === 401) {
+      localStorage.removeItem("token")
+      navigate("/login")
+    }else if (error.response.status === 404) {
+      alert("Guard Not Found")
+    } else if (error.response.status === 500) {
+      alert("Internal Server Error")
     }
   }
+}
 
   // 3️⃣ LOADING STATE
   if (loading) {
@@ -106,6 +113,7 @@ const navigate = useNavigate()
       </div>
     )
   }
+
   return (
     <div className="min-h-screen bg-gray-100 p-4 sm:p-6 md:p-10">
 
@@ -186,7 +194,9 @@ const navigate = useNavigate()
                           Edit
                         </button>
 
-                        <button onClick={() => handleDelete(guard._id)} className="px-3 py-1 text-sm bg-red-100 text-red-600 rounded-md">
+                        <button onClick={() => {
+                          console.log("Delete Clicked")
+                          openDeleteModal(guard._id)}} className="px-3 py-1 text-sm bg-red-100 text-red-600 rounded-md">
                           Delete
                         </button>
 
@@ -203,6 +213,47 @@ const navigate = useNavigate()
 
         </div>
       </div>
+
+      {showModal && (
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-md">
+
+    {/* Modal Box */}
+    <div className="bg-white rounded-2xl p-6 w-full max-w-md text-center shadow-2xl">
+
+      <h2 className="text-xl font-bold text-black">
+        Are you sure?
+      </h2>
+
+      <p className="text-gray-600 mt-2">
+        This action cannot be undone.
+      </p>
+
+      <div className="flex gap-3 mt-6">
+
+        <button
+          onClick={() => setShowModal(false)}
+          className="flex-1 py-2 bg-gray-200 rounded-lg"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={confirmDelete}
+          className="flex-1 py-2 bg-red-600 text-white rounded-lg"
+        >
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+)}
     </div>
   )
+
+  
+  
+
 }

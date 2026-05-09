@@ -7,6 +7,8 @@ import { AddGuard } from "../Pages/AddGuard"
 import { Guards } from "../Pages/Guards"
 import { Profile } from "../Pages/Profile"
 import { ProfileEdit } from "../Pages/profileEdit"
+import { AssignLocation1 } from "../Pages/AssignLocation1"
+import { AssignLocation2 } from "../Pages/AssignLocation2"
 
 const router = createBrowserRouter([
    {
@@ -50,10 +52,20 @@ const router = createBrowserRouter([
     element : <ProfileEdit/>
    },
 
+    {
+        path : "/assignLocation1",
+        element : <AssignLocation1/>
+    } ,
+
+     {
+        path : "/assignLocation2",
+        element : <AssignLocation2/>
+    }
+    
         ]
     },
 
-    
+   
 ])
 
 export default function App(){
