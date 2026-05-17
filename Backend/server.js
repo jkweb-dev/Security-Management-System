@@ -8,6 +8,7 @@ import AddguardRoute from "./Routes/AddGuardRoutes.js";
 import AllGuards from "./Routes/GuardsRoute.js";
 import ProfileRoute from "./Routes/ProfileRoute.js";
 import locationRoute from "./Routes/locationRoute.js";
+import AttendenceRoute from "./Routes/attendenceRoute.js";
 
 dotenv.config()
 
@@ -26,6 +27,7 @@ app.use("/AddGuard" ,AddguardRoute)
 app.use("/guards" ,AllGuards )
 app.use("/profile/:id" ,ProfileRoute )
 app.use("/location" ,locationRoute )
+app.use("/attendance" ,AttendenceRoute )
 
 const PORT = process.env.PORT
 

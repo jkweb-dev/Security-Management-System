@@ -29,7 +29,7 @@ const navigate = useNavigate()
                 if (error.response && error.response.status === 401) {
                     localStorage.removeItem("token")
                     navigate("/login")
-                }else if (error.response.status === 500){
+                }else if (error.response?.status === 500){
                    setError("Something went wrong in Server , Please try again later")
                 }
             }finally{
@@ -71,7 +71,7 @@ const navigate = useNavigate()
       ">
 
         {/* Attendance */}
-        <div className="group relative p-6 sm:p-7 md:p-8 rounded-2xl md:rounded-3xl
+        <div onClick={() => {navigate("/addAttendence1")}} className="group relative p-6 sm:p-7 md:p-8 rounded-2xl md:rounded-3xl
                         bg-white/5 border border-white/20 backdrop-blur-lg
                         transition duration-300
                         hover:scale-105 hover:border-blue-400
@@ -86,7 +86,7 @@ const navigate = useNavigate()
         </div>
 
         {/* Location */}
-        <div className="group relative p-6 sm:p-7 md:p-8 rounded-2xl md:rounded-3xl
+        <div onClick={() => {navigate("/assignLocation1")}} className="group relative p-6 sm:p-7 md:p-8 rounded-2xl md:rounded-3xl
                         bg-white/5 border border-white/20 backdrop-blur-lg
                         transition duration-300
                         hover:scale-105 hover:border-purple-400

@@ -9,6 +9,8 @@ import { Profile } from "../Pages/Profile"
 import { ProfileEdit } from "../Pages/profileEdit"
 import { AssignLocation1 } from "../Pages/AssignLocation1"
 import { AssignLocation2 } from "../Pages/AssignLocation2"
+import { AddAttendence1 } from "../Pages/AddAttendence1"
+import {AddAttendence2 } from "../Pages/AddAttendence2"
 
 const router = createBrowserRouter([
    {
@@ -60,7 +62,17 @@ const router = createBrowserRouter([
      {
         path : "/assignLocation2",
         element : <AssignLocation2/>
-    }
+    },
+
+       {
+        path : "/addAttendence1",
+        element : <AddAttendence1/>
+    },
+
+       {
+        path : "/addAttendence2",
+        element : <AddAttendence2/>
+    },
     
         ]
     },

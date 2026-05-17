@@ -40,6 +40,7 @@ const handleLoad = async (e) => {
             }
           }
         )
+        console.log(res.data.data)
         setAssignedZones(res.data.data)
     
         setShowZones(true)
