@@ -131,7 +131,7 @@ const navigate = useNavigate()
         </div>
 
         {/* Fine Management */}
-        <div className="group relative p-6 sm:p-7 md:p-8 rounded-2xl md:rounded-3xl
+        <div onClick={() => {navigate("/fine-management")}} className="group relative p-6 sm:p-7 md:p-8 rounded-2xl md:rounded-3xl
                         bg-white/5 border border-white/20 backdrop-blur-lg
                         transition duration-300
                         hover:scale-105 hover:border-red-400
