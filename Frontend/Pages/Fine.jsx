@@ -24,6 +24,22 @@ export const FineManagement = () => {
         description : ""
        })
 
+       const [editId , setEditId] = useState(null)
+
+       const handleEdit = (fine) => {
+        setFormData({
+          id : fine.id ,
+          name : fine.name ,
+          date : fine.date ,
+          shift : fine.shift ,
+          violationType : fine.violationType ,
+          amount : fine.amount ,
+          description : fine.description
+        })
+
+        setEditId(fine._id)
+       }
+
        const handleSaveFine = async (e) => {
         e.preventDefault()
         if (!formData.id || !formData.name || !formData.date || !formData.shift || !formData.violationType || !formData.amount || !formData.description) {
@@ -36,6 +52,17 @@ export const FineManagement = () => {
 
           const token = localStorage.getItem("token")
 
+          if (editId) {
+            await axios.put(`http://localhost:5000/fine/updateFine/${editId}` , formData , {
+              headers : {
+                Authorization : `Bearer ${token}`
+              }
+            })
+
+            alert("Updated Successfully")
+            setEditId(null)
+          }else {
+
           const res = await axios.post("http://localhost:5000/fine/addFineOrUpdate" ,
             formData ,
             {
@@ -46,6 +73,9 @@ export const FineManagement = () => {
           )
 
           alert("Fined Saved Successfully !")
+          }
+
+
 
        const resp = await axios.get("http://localhost:5000/fine/getFines" , {
                         headers : {
@@ -271,7 +301,7 @@ return (
           {/* SAVE BUTTON */}
           <div className="mt-6 flex justify-end">
             <button type="submit" onClick={handleSaveFine} className="px-6 py-3 rounded-xl bg-indigo-500 text-white font-semibold shadow-lg hover:bg-indigo-600 transition">
-              Save Fine
+             {editId ? "Edit Fine" : "Save Fine"}
             </button>
           </div>
 
@@ -332,8 +362,8 @@ return (
                       <td className="p-3">{fine.description}</td>
 
                       <td className="p-3 flex gap-2">
-                        <button className="px-3 py-1 text-xs bg-blue-500 text-white rounded-lg">
-                          Edit
+                        <button onClick={() => handleEdit(fine)} className="px-3 py-1 text-xs bg-blue-500 text-white rounded-lg">
+                     Edit
                         </button>
 
                         <button onClick={() => handleDelete(fine._id)} className="px-3 py-1 text-xs bg-red-500 text-white rounded-lg">
