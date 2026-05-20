@@ -89,9 +89,9 @@ const navigate = useNavigate()
       localStorage.removeItem("token")
       navigate("/login")
     }else if (error.response.status === 404) {
-      alert("Guard Not Found")
+     setErrort("Guard Not Found")
     } else if (error.response.status === 500) {
-      alert("Internal Server Error")
+      setError("Internal Server Error")
     }
   }
 }

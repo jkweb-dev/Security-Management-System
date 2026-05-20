@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
 import Loader from "../Components/Loader"
 import { useParams } from "react-router-dom"
 import axios from "axios"
@@ -170,7 +171,7 @@ export const ProfileEdit = () => {
 
   })  
   setTimeout(() => {
-    alert("Guard Updated Successfully")
+  toast.success("Guard Updated Successfully")
   } , 0)
 
     navigate("/guards")
@@ -179,9 +180,9 @@ export const ProfileEdit = () => {
              localStorage.removeItem("token")
              navigate("/login")
            }else if(error.response && error.response.status === 500){
-           alert("Guard Not updated Due to Some Reason")
+          setErr("Guard Not updated Due to Some Reason")
            }else if (error.response && error.response.status === 404){
-           alert("Guard Not updated Because Guard Not Found")
+           setErr("Guard Not updated Because Guard Not Found")
            }
   }
 

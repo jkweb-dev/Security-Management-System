@@ -51,11 +51,11 @@ export const LoginPage = () => {
 
 
   } catch (error) {
-    console.log(error)
+  
 
     if (error.response) {
       setError({
-        general : error.response.data.message
+       general : error.response.data.message
       })
 
     }else {

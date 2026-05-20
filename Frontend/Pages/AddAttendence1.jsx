@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../Components/Loader";
+import { toast } from "react-toastify";
 import ErrorScreen from "../Components/Error";
 
 export const AddAttendence1 = () => {
@@ -42,7 +43,7 @@ const handleSave = async (e) => {
 
   // 1. VALIDATION
   if (!validateAttendance()) {
-    alert("Please complete attendance for all guards");
+    toast.error("Please complete attendance for all guards");
     return;
   }
 
@@ -72,7 +73,7 @@ const handleSave = async (e) => {
     );
 
     // 4. SUCCESS ACTION
-    alert("Attendance saved successfully");
+    toast.success("Attendance saved successfully");
 
     // optional reset
     setTableData([]);
@@ -101,7 +102,7 @@ const handleSave = async (e) => {
      e.preventDefault()
 
      if (!date || !shift) {
-        alert("Please Select Date and Shift")
+        toast.error("Please Select Date and Shift")
         return;
     }
 setLoading(true)

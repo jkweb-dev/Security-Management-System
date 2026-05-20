@@ -2,6 +2,7 @@ import { useState } from "react"
 import validatee from "../Components/AddGuardValidation"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 export const AddGuard = () => {
 
@@ -84,7 +85,7 @@ const [resetKey , setResetKey] = useState(0)
                   }
                 )
 
-                alert("Guard Added Successfully")
+               toast.success("Guard Added Successfully")
 
                 
                 setForm({

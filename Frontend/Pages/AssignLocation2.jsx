@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import { useLocation } from "react-router-dom"
+import {toast } from "react-toastify"
 import Loader from "../Components/Loader"
 import axios from "axios"
 import ErrorScreen from "../Components/Error"
@@ -74,7 +75,7 @@ export const AssignLocation2 = () => {
   const selectedGuardId = selectedGuards[locationIndex]
 
   if (!selectedGuardId) {
-    return alert("Select Guard First")
+    return toast.error("Select Guard First")
   }
 
   const fullGuard = guards.find(
@@ -91,7 +92,7 @@ export const AssignLocation2 = () => {
     )
 
   if (alreadyExists) {
-    return alert("Guard already assigned")
+    return toast.error("Guard already assigned")
   }
 
   updated[locationIndex].assignedGuards.push({
@@ -145,7 +146,7 @@ const handleSave = async () => {
         }
       }
     )
-    alert("Assignment Saved Successfully")
+  toast.success("Assignment Saved Successfully")
   } catch (error) {
     if (error.response.status === 401) {
       localStorage.removeItem("token")
@@ -167,8 +168,6 @@ const handleSave = async () => {
             return <ErrorScreen error = {error}/>
         }
 
-        console.log(assignments)
-        console.log(guards)
     return (
     <>
    <div className="

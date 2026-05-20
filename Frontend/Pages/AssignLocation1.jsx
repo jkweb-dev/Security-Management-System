@@ -1,5 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
+import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 import Loader from "../Components/Loader"
 import ErrorScreen from "../Components/Error"
@@ -25,7 +26,7 @@ const handleLoad = async (e) => {
     e.preventDefault()
 
     if (!date || !shift) {
-        alert("Please Select Date and Shift")
+       toast.error("Please Select Date and Shift")
         return;
     }
 
@@ -49,7 +50,7 @@ const handleLoad = async (e) => {
                     localStorage.removeItem("token")
                     navigate("/login")
                 }else if (error.response.status === 500){
-                   console.log("Something went wrong in Server , Please try again later")
+                   setError("Something went wrong in Server , Please try again later")
                 }
     }finally{
         setLoading(false)

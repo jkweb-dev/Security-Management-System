@@ -1,4 +1,5 @@
 import {createBrowserRouter,  RouterProvider } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
 import { Landing } from "../Pages/landingPage"
 import { LoginPage } from "../Pages/login"
 import { Dashboard } from "../Pages/dashboard"
@@ -10,8 +11,8 @@ import { ProfileEdit } from "../Pages/profileEdit"
 import { AssignLocation1 } from "../Pages/AssignLocation1"
 import { AssignLocation2 } from "../Pages/AssignLocation2"
 import { AddAttendence1 } from "../Pages/AddAttendence1"
-
 import { FineManagement } from "../Pages/Fine"
+import "react-toastify/dist/ReactToastify.css"
 
 const router = createBrowserRouter([
    {
@@ -83,5 +84,5 @@ const router = createBrowserRouter([
 ])
 
 export default function App(){
-    return <RouterProvider router={router}/>
+    return  <> <RouterProvider router={router}/> <ToastContainer/> </> 
 }

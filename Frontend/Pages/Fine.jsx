@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import Loader from "../Components/Loader"
 import ErrorScreen from "../Components/Error"
+import { toast } from "react-toastify"
 
 export const FineManagement = () => {
 
@@ -43,7 +44,7 @@ export const FineManagement = () => {
        const handleSaveFine = async (e) => {
         e.preventDefault()
         if (!formData.id || !formData.name || !formData.date || !formData.shift || !formData.violationType || !formData.amount || !formData.description) {
-          alert("Please Fill All Fields")
+         toast.error("Please Fill All Fields")
           return;
         }
 
@@ -58,8 +59,7 @@ export const FineManagement = () => {
                 Authorization : `Bearer ${token}`
               }
             })
-
-            alert("Updated Successfully")
+toast.success("Updated Successfully")
             setEditId(null)
           }else {
 
@@ -72,7 +72,7 @@ export const FineManagement = () => {
             }
           )
 
-          alert("Fined Saved Successfully !")
+          toast.success("Fined Saved Successfully !")
           }
 
 
@@ -105,7 +105,7 @@ export const FineManagement = () => {
           } else if (error.response?.status === 500) {
             setError("Internal Server Issue")
           } else if (error.response?.status === 404) {
-            alert("Fine already exist for that id ,shift and date")
+            toast.errort("Fine already exist for that id ,shift and date")
           }
 
         } finally{
@@ -170,7 +170,7 @@ export const FineManagement = () => {
 
           setFines((p) => p.filter((fine) => fine._id !== id))
 
-          alert("Deleted Successfully")
+         toast.success("Deleted Successfully")
 
         } catch (error) {
           
