@@ -72,7 +72,7 @@ if (error) {
         }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-black flex items-center justify-center px-3 sm:px-4 md:px-6 py-6">
+   <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-indigo-50 flex items-center justify-center px-3 sm:px-4 md:px-6 py-6 font-['Inter',sans-serif]">
 
    {!showZones && (
      <form onSubmit={handleLoad}>
@@ -83,17 +83,17 @@ if (error) {
         sm:max-w-md
         md:max-w-xl
         lg:max-w-2xl
-        bg-white/5
+        bg-white/80
         backdrop-blur-2xl
-        border border-white/10
+        border border-slate-200
         rounded-[28px] sm:rounded-[32px]
-        shadow-2xl
+        shadow-2xl shadow-indigo-100/60
         p-5 sm:p-7 md:p-10
         overflow-hidden
       ">
 
         {/* Background Glow */}
-        <div className="absolute -top-10 -left-10 w-32 h-32 bg-blue-500/20 blur-3xl rounded-full"></div>
+        <div className="absolute -top-10 -left-10 w-32 h-32 bg-indigo-200/50 blur-3xl rounded-full"></div>
 
         {/* Heading */}
         <div className="text-center mb-8 md:mb-10 relative z-10">
@@ -104,12 +104,12 @@ if (error) {
             sm:w-20 sm:h-20
             mx-auto
             rounded-3xl
-            bg-blue-500/10
-            border border-blue-500/20
+            bg-blue-50
+            border border-blue-100
             flex items-center justify-center
             text-3xl sm:text-4xl
             mb-4 sm:mb-5
-            shadow-lg
+            shadow-sm
           ">
             📍
           </div>
@@ -119,16 +119,17 @@ if (error) {
             text-2xl
             sm:text-3xl
             md:text-5xl
-            font-bold
-            text-white
+            font-semibold
+            text-slate-900
             tracking-tight
+            font-['Plus_Jakarta_Sans',sans-serif]
           ">
             Assign Guards
           </h1>
 
           {/* Subtitle */}
           <p className="
-            text-slate-400
+            text-slate-500
             mt-3 sm:mt-4
             text-sm sm:text-base
             leading-relaxed
@@ -146,7 +147,7 @@ if (error) {
 
           {/* Date */}
           <div>
-            <label className="block text-slate-300 mb-2 sm:mb-3 text-sm font-medium">
+            <label className="block text-slate-600 mb-2 sm:mb-3 text-sm font-medium">
               Select Date
             </label>
 <input
@@ -155,27 +156,25 @@ if (error) {
   onChange={(e) => setDate(e.target.value)}
   className="
     w-full
-    bg-slate-900/80
-    border border-slate-700
-    focus:border-blue-500
-    focus:ring-4 focus:ring-blue-500/20
+    bg-slate-50/60
+    border border-slate-200
+    focus:border-indigo-400
+    focus:bg-white
+    focus:ring-4 focus:ring-indigo-50
     transition-all duration-300
     rounded-2xl
     px-4 sm:px-5
     py-3 sm:py-4
     text-sm sm:text-base
-    text-white
+    text-slate-900
     outline-none
-
-    [&::-webkit-calendar-picker-indicator]:invert
-    [&::-webkit-calendar-picker-indicator]:cursor-pointer
   "
 />
           </div>
 
           {/* Shift */}
           <div>
-            <label className="block text-slate-300 mb-2 sm:mb-3 text-sm font-medium">
+            <label className="block text-slate-600 mb-2 sm:mb-3 text-sm font-medium">
               Select Shift
             </label>
 
@@ -184,16 +183,17 @@ if (error) {
             onChange={(e) => setShift(e.target.value)}
               className="
                 w-full
-                bg-slate-900/80
-                border border-slate-700
-                focus:border-blue-500
-                focus:ring-4 focus:ring-blue-500/20
+                bg-slate-50/60
+                border border-slate-200
+                focus:border-indigo-400
+                focus:bg-white
+                focus:ring-4 focus:ring-indigo-50
                 transition-all duration-300
                 rounded-2xl
                 px-4 sm:px-5
                 py-3 sm:py-4
                 text-sm sm:text-base
-                text-white
+                text-slate-900
                 outline-none
               "
             >
@@ -208,8 +208,8 @@ if (error) {
           type="submit"
             className="
               w-full
-              bg-blue-600
-              hover:bg-blue-700
+              bg-gradient-to-r from-indigo-600 to-sky-500
+              hover:from-indigo-500 hover:to-sky-400
               active:scale-[0.99]
               transition-all duration-300
               rounded-2xl
@@ -217,8 +217,8 @@ if (error) {
               text-white
               font-semibold
               text-base sm:text-lg
-              shadow-xl
-              hover:shadow-blue-500/30
+              shadow-lg shadow-indigo-200
+              hover:shadow-xl hover:shadow-indigo-200
             "
           >
             Load Assignments
@@ -228,7 +228,7 @@ if (error) {
 
         {/* Footer */}
         <div className="mt-6 sm:mt-8 text-center relative z-10">
-          <p className="text-slate-500 text-xs sm:text-sm">
+          <p className="text-slate-400 text-xs sm:text-sm">
             Security Management System
           </p>
         </div>
@@ -242,11 +242,11 @@ if (error) {
 
     {/* Header */}
     <div className="text-center mb-8">
-      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
+      <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-900 font-['Plus_Jakarta_Sans',sans-serif]">
         Zone Assignment Dashboard
       </h2>
 
-      <p className="text-gray-400 mt-2 text-sm sm:text-base">
+      <p className="text-slate-500 mt-2 text-sm sm:text-base">
         Select a zone to assign guards
       </p>
     </div>
@@ -274,17 +274,17 @@ if (error) {
               transition-all duration-300
 
               ${isLocked
-                ? "bg-red-500/10 border-red-500/30 opacity-60 cursor-not-allowed"
-                : "bg-green-500/10 border-green-500/30 hover:scale-[1.03] cursor-pointer"
+                ? "bg-rose-50 border-rose-200 opacity-70 cursor-not-allowed"
+                : "bg-emerald-50 border-emerald-200 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.3)] cursor-pointer"
               }
             `}
           >
 
-            <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white">
+            <h3 className="text-base sm:text-lg md:text-xl font-semibold text-slate-900">
               {zone}
             </h3>
 
-            <p className="text-xs sm:text-sm text-gray-300 mt-2">
+            <p className={`text-xs sm:text-sm mt-2 font-medium ${isLocked ? "text-rose-600" : "text-emerald-600"}`}>
               {isLocked ? "🔒 Already Assigned" : "🟢 Available"}
             </p>
 
@@ -300,9 +300,13 @@ if (error) {
         onClick={() => setShowZones(false)}
         className="
           px-5 sm:px-6 py-2 sm:py-3
-          bg-gray-700 hover:bg-gray-600
-          rounded-xl text-white
+          bg-white hover:bg-slate-50
+          border border-slate-200
+          rounded-xl text-slate-700
           text-sm sm:text-base
+          font-medium
+          shadow-sm
+          transition duration-200
         "
       >
         Back
